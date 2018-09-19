@@ -13,6 +13,8 @@ public class UIScoreManager : MonoBehaviour
     int score = 0;
     int plusScore = 0;
 
+    int doorPassed = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -26,13 +28,16 @@ public class UIScoreManager : MonoBehaviour
     {
         if (gameManager)
         {
-            //gameManager.GetComponent<GameManager>()
+            if (doorPassed < gameManager.GetComponent<GameManager>().doorsPassed)
+            {
+                doorPassed = gameManager.GetComponent<GameManager>().doorsPassed;
+                InstantiateMoveUpText(100);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            //AddPlusScore(10);
-            InstantiateMoveUpText(10);
+            InstantiateMoveUpText(500);
         }
 
         if (plusScore > 0)
