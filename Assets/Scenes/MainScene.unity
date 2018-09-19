@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 46139141}
   - component: {fileID: 46139140}
   m_Layer: 5
-  m_Name: ImageLife1
+  m_Name: ImageHp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 635677722}
   - component: {fileID: 635677721}
   m_Layer: 5
-  m_Name: ImageLife3
+  m_Name: ImageHp3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 693752986}
   - component: {fileID: 693752985}
   m_Layer: 5
-  m_Name: TextLife
+  m_Name: TextHp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,9 +624,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'LIFE
-
-'
+  m_Text: HP
 --- !u!222 &693752986
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -858,7 +856,7 @@ GameObject:
   - component: {fileID: 1239593610}
   - component: {fileID: 1239593611}
   m_Layer: 5
-  m_Name: Life
+  m_Name: Hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -894,7 +892,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239593609}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392f89369c472284aa438ac51aaa8d0a, type: 3}
+  m_Script: {fileID: 11500000, guid: d70a726807df2c443ab59bcc60d54cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1577047116
@@ -1159,7 +1157,7 @@ GameObject:
   - component: {fileID: 2049158522}
   - component: {fileID: 2049158521}
   m_Layer: 5
-  m_Name: ImageLife2
+  m_Name: ImageHp2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

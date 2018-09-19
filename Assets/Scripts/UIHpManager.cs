@@ -3,40 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UILifeManager : MonoBehaviour
+public class UIHpManager : MonoBehaviour
 {
-    const int initLife = 3;
+    const int initHp = 3;
 
-    int life = initLife;
+    GameObject gameManager;
+    int hp = initHp;
 
     // Use this for initialization
     void Start()
     {
         // game scene test load
         //Application.LoadLevelAdditive("GameScene");
+
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        // test
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (gameManager)
         {
-            LifeUp();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            LifeDown();
+            hp = gameManager.GetComponent<GameManager>().hp;
         }
 
-        for (int i = 1; i <= initLife; ++i)
+        for (int i = 1; i <= initHp; ++i)
         {
-            GameObject obj = GameObject.Find("ImageLife" + i.ToString());
-            if (i > life)
+            // update color alpha
+            GameObject obj = GameObject.Find("ImageHp" + i.ToString());
+            if (i > hp)
             {
                 Color color = obj.GetComponent<Image>().color;
                 color.a -= 0.1f;
-                if(color.a < 0)
+                if (color.a < 0)
                 {
                     color.a = 0;
                 }
@@ -53,25 +52,5 @@ public class UILifeManager : MonoBehaviour
                 obj.GetComponent<Image>().color = color;
             }
         }
-    }
-
-    public bool LifeUp()
-    {
-        if (life < initLife)
-        {
-            ++life;
-            return true;
-        }
-        return false;
-    }
-
-    public bool LifeDown()
-    {
-        if (life > 0)
-        {
-            --life;
-            return true;
-        }
-        return false;
     }
 }

@@ -7,6 +7,7 @@ public class UIScoreManager : MonoBehaviour
 {
     public GameObject moveUpObject;
 
+    GameObject gameManager;
     GameObject scoreObject;
     GameObject moveUpParent;
     int score = 0;
@@ -15,6 +16,7 @@ public class UIScoreManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        gameManager = GameObject.Find("GameManager");
         scoreObject = GameObject.Find("TextScoreNumber");
         moveUpParent = GameObject.Find("TextMoveUpParent");
     }
@@ -22,6 +24,11 @@ public class UIScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager)
+        {
+            //gameManager.GetComponent<GameManager>()
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             //AddPlusScore(10);
