@@ -8,6 +8,7 @@ public class UIHpManager : MonoBehaviour
     const int initHp = 3;
 
     GameObject gameManager;
+    bool sizeUp = false;
     int hp = initHp;
 
     // Use this for initialization
@@ -51,6 +52,26 @@ public class UIHpManager : MonoBehaviour
                 }
                 obj.GetComponent<Image>().color = color;
             }
+
+            // update size
+            Vector2 size = obj.GetComponent<RectTransform>().sizeDelta;
+            if (sizeUp)
+            {
+                size += new Vector2(0.5f, 0.5f);
+                if (size.x >= 70 && i == initHp)
+                {
+                    sizeUp = false;
+                }
+            }
+            else
+            {
+                size -= new Vector2(0.5f, 0.5f);
+                if (size.x <= 50 && i == initHp)
+                {
+                    sizeUp = true;
+                }
+            }
+            obj.GetComponent<RectTransform>().sizeDelta = size;
         }
     }
 }
