@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
     GameObject clickedObject;
     public GameObject spawnerArea;
     GameObject[] doors;
+    GameObject player;
+    GameObject playerTarget;
 
     private float startCountDown = 3;
     private bool gameStarted = false;
@@ -22,6 +24,9 @@ public class GameManager : MonoBehaviour {
     void Start () {
         mainCamera = Camera.main;
         mainCamera.enabled = true;
+
+        playerTarget = GameObject.Find("PlayerTargetPosition");
+        player = GameObject.Find("PlayerCharacter");
     }
 	
 	// Update is called once per frame
@@ -32,7 +37,14 @@ public class GameManager : MonoBehaviour {
         if (startCountDown <= 0 && gameStarted == false)
         {
             spawnerArea.SetActive(true);
+            playerTarget.SetActive(false);
             gameStarted = true;
+        } else if (gameStarted == false)
+        {
+            // Move the player to the view while game is counting down.
+            float speed = Vector3.Distance(player.transform.position, playerTarget.transform.position) / startCountDown;
+            float step = speed * Time.deltaTime;
+            player.transform.position = Vector3.MoveTowards(player.transform.position, playerTarget.transform.position, step);
         }
 
         if (Input.GetMouseButtonDown(0))
