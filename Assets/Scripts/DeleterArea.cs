@@ -9,7 +9,6 @@ public class DeleterArea : MonoBehaviour {
         if (col.gameObject.tag == "SlidingDoor")
         {
             Destroy(col.gameObject);
-            // Debug.Log("Destroyed: " + col.gameObject.name);
         }
     }
 }

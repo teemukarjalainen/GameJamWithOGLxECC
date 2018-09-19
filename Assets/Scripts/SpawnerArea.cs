@@ -42,7 +42,6 @@ public class SpawnerArea : MonoBehaviour {
         if (intervalTimer <= 0)
         {
             // Timer ran out, create new door
-            //Debug.Log("Create door");
             Instantiate(slidingDoor, spawnerArea.transform, false);
             resetIntervalTimer();
         }
@@ -54,7 +53,6 @@ public class SpawnerArea : MonoBehaviour {
 
         if (intervalTimer <= 0)
         {
-            //Debug.Log("Create door");
             Instantiate(slidingDoor, spawnerArea.transform, false);
             resetIntervalTimerRandom();
         }
@@ -68,7 +66,6 @@ public class SpawnerArea : MonoBehaviour {
     void resetIntervalTimerRandom()
     {
         intervalTimer = Random.Range(minInterval, maxInterval);
-        // Debug.Log("Randomized interval: " + intervalTimer);
     }
 
     public void changeMinInterval()

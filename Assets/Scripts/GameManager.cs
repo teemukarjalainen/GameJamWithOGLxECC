@@ -5,25 +5,36 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     Camera mainCamera;
     GameObject clickedObject;
-    GameObject spawnerArea;
+    public GameObject spawnerArea;
     GameObject[] doors;
 
+    private float startCountDown = 3;
+    private bool gameStarted = false;
+    private int passesBetweenLevels = 5;
+
+    public int hp;
+    int currentLevel = 0;
     public int doorsPassed { get; set; }
     public int combo { get; set; }
 
-    int currentLevel = 0;
 
     // Use this for initialization
     void Start () {
         mainCamera = Camera.main;
         mainCamera.enabled = true;
-
-        spawnerArea = GameObject.Find("SpawnerArea");
-        // Debug.Log("SpawnerArea: " + spawnerArea + " Location: " + spawnerArea.transform.position);
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        startCountDown -= Time.deltaTime;
+
+        if (startCountDown <= 0 && gameStarted == false)
+        {
+            spawnerArea.SetActive(true);
+            gameStarted = true;
+        }
+
         doors = GameObject.FindGameObjectsWithTag("SlidingDoor");
 
         if (Input.GetMouseButtonDown(0))
@@ -34,8 +45,10 @@ public class GameManager : MonoBehaviour {
             {
                 // the object identified by hit.transform was clicked
                 clickedObject = hit.transform.gameObject;
-                clickedObject.GetComponent<SlidingDoor>().operateDoor();
-                //Debug.Log("Clicked: " + clickedObject.name + " open: " + clickedObject.GetComponent<SlidingDoor>().isOpen);
+                if (clickedObject.tag == "SlidingDoor")
+                {
+                    clickedObject.GetComponent<SlidingDoor>().operateDoor();
+                }
 
                 foreach (GameObject door in doors)
                 {
@@ -46,6 +59,22 @@ public class GameManager : MonoBehaviour {
                 }
             } 
         }
+    }
+
+    public void removeHP()
+    {
+        hp--;
+
+        if (hp == 0)
+        {
+            gameOver();
+        }
+    }
+
+    public void gameOver()
+    {
+        // TODO: Implement game over feature
+        spawnerArea.SetActive(false);
     }
 
     public void clearCombo()
@@ -62,7 +91,7 @@ public class GameManager : MonoBehaviour {
     {
         doorsPassed++;
 
-        if (doorsPassed % 10 == 0)
+        if (doorsPassed % passesBetweenLevels == 0)
         {
             updateLevel();
         }
@@ -71,5 +100,7 @@ public class GameManager : MonoBehaviour {
     void updateLevel()
     {
         currentLevel++;
+        spawnerArea.GetComponent<SpawnerArea>().changeMaxInterval();
+        spawnerArea.GetComponent<SpawnerArea>().changeMinInterval();
     }
 }

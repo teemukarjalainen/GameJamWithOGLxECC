@@ -11,11 +11,6 @@ public class Player : MonoBehaviour {
         gameManager = GameObject.Find("GameManager");
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnTriggerEnter(Collider col)
     {
@@ -24,18 +19,19 @@ public class Player : MonoBehaviour {
         if (door.GetComponent<SlidingDoor>().isOpen)
         {
             // DOOR PASSED
+            // We passed a door so let it move on. Increment the passed doors and combo counter.
             gameManager.GetComponent<GameManager>().addPass();
             gameManager.GetComponent<GameManager>().addCombo();
-
-            // Debug.Log("Passed : " + col.gameObject.name);
-            Debug.Log("Score: " + gameManager.GetComponent<GameManager>().doorsPassed + " Combo: " + gameManager.GetComponent<GameManager>().combo);
         } else if (!door.GetComponent<SlidingDoor>().isOpen)
         {
             // DOOR HIT
-            // Do we want to destroy doors if we hit them?
-            // Destroy(col.gameObject);
+            // Destroy the door that we collided, clear player combo and remove 1 health
+            Destroy(col.gameObject);
             gameManager.GetComponent<GameManager>().clearCombo();
-            Debug.Log("Crashed to: " + col.gameObject.name);
+            gameManager.GetComponent<GameManager>().removeHP();
         }
+
+        // Show player score in debug, will be removed and replaced with actual score board
+        Debug.Log("HP: " + gameManager.GetComponent<GameManager>().hp + " Score: " + gameManager.GetComponent<GameManager>().doorsPassed + " Combo: " + gameManager.GetComponent<GameManager>().combo);
     }
 }

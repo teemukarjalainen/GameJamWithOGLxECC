@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65216928177992094}
   - component: {fileID: 54554546811726638}
   - component: {fileID: 114284488603201104}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SlidingDoor
   m_TagString: SlidingDoor
   m_Icon: {fileID: 0}
