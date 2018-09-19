@@ -55,21 +55,21 @@ public class UITitleManager : MonoBehaviour
         else
         {
             Color color = imageObject.GetComponent<Image>().color;
-            color.a -= 0.1f;
+            color.a -= 0.05f;
             if (color.a <= 0)
             {
                 color.a = 0;
             }
             imageObject.GetComponent<Image>().color = color;
             color = maskObject.GetComponent<Image>().color;
-            color.a -= 0.1f;
+            color.a -= 0.05f;
             if (color.a <= 0)
             {
                 color.a = 0;
             }
             maskObject.GetComponent<Image>().color = color;
             color = textObject.GetComponent<Text>().color;
-            color.a -= 0.1f;
+            color.a -= 0.05f;
             if (color.a <= 0)
             {
                 color.a = 0;
@@ -81,7 +81,7 @@ public class UITitleManager : MonoBehaviour
     IEnumerator SceneChange()
     {
         isSceneEnd = true;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene("GameScene");
     }
 }
