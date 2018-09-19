@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public int doorsPassed { get; set; }
     public int combo { get; set; }
 
+    public bool isGameOver = false;
 
     // Use this for initialization
     void Start () {
@@ -92,6 +93,8 @@ public class GameManager : MonoBehaviour {
     {
         // TODO: Implement game over feature
         spawnerArea.SetActive(false);
+
+        isGameOver = true;
     }
 
     public void clearCombo()

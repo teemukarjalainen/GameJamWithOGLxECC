@@ -54,12 +54,7 @@ public class UIScoreManager : MonoBehaviour
         scoreObject.GetComponent<Text>().text = str0 + score.ToString();
     }
 
-    public void AddPlusScore(int addScore)
-    {
-        plusScore += addScore;
-    }
-
-    public void InstantiateMoveUpText(int addScore)
+    void InstantiateMoveUpText(int addScore)
     {
         int down = 0;
         if (moveUpParent.transform.childCount > 0)
@@ -77,5 +72,10 @@ public class UIScoreManager : MonoBehaviour
         instObj.transform.localPosition = instPos;
         instObj.GetComponent<Text>().text = "+" + addScore.ToString();
         instObj.GetComponent<UIMoveUpScore>().addScore = addScore;
+    }
+
+    public void AddPlusScore(int addScore)
+    {
+        plusScore += addScore;
     }
 }

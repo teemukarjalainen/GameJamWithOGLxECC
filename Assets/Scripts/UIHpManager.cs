@@ -57,17 +57,19 @@ public class UIHpManager : MonoBehaviour
             Vector2 size = obj.GetComponent<RectTransform>().sizeDelta;
             if (sizeUp)
             {
-                size += new Vector2(0.5f, 0.5f);
+                size += new Vector2(0.6f, 0.6f);
                 if (size.x >= 70 && i == initHp)
                 {
+                    size = new Vector2(70, 70);
                     sizeUp = false;
                 }
             }
             else
             {
-                size -= new Vector2(0.5f, 0.5f);
-                if (size.x <= 50 && i == initHp)
+                size -= new Vector2(0.6f, 0.6f);
+                if (size.x <= 60 && i == initHp)
                 {
+                    size = new Vector2(60, 60);
                     sizeUp = true;
                 }
             }
