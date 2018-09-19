@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     Camera mainCamera;
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour {
 
         playerTarget = GameObject.Find("PlayerTargetPosition");
         player = GameObject.Find("PlayerCharacter");
+
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
     }
 	
 	// Update is called once per frame

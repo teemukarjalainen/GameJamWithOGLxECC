@@ -11,6 +11,7 @@ public class UIGameOver : MonoBehaviour
     GameObject gameOverTextObject;
     GameObject gameOverButtonObject;
     GameObject gameOverButtonObject2;
+    GameObject fadeObject;
     bool isGameOver = false;
 
     // Use this for initialization
@@ -21,6 +22,7 @@ public class UIGameOver : MonoBehaviour
         gameOverTextObject = GameObject.Find("TextGameOver");
         gameOverButtonObject = GameObject.Find("ButtonReStart");
         gameOverButtonObject2 = GameObject.Find("ButtonReturnToTitle");
+        fadeObject = GameObject.Find("Fade");
     }
 
     // Update is called once per frame
@@ -71,13 +73,21 @@ public class UIGameOver : MonoBehaviour
         }
     }
 
+    IEnumerator SceneChange(string nextScene)
+    {
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene(nextScene);
+    }
+
     public void OnClickReStartButton()
     {
-
+        fadeObject.GetComponent<UIFadeManager>().fadeOut = true;
+        StartCoroutine("SceneChange", "GameScene");
     }
 
     public void OnClickReturnToTitleButton()
     {
-        
+        fadeObject.GetComponent<UIFadeManager>().fadeOut = true;
+        StartCoroutine("SceneChange", "TitleScene");
     }
 }
