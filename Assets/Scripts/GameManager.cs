@@ -35,8 +35,6 @@ public class GameManager : MonoBehaviour {
             gameStarted = true;
         }
 
-        doors = GameObject.FindGameObjectsWithTag("SlidingDoor");
-
         if (Input.GetMouseButtonDown(0))
         { // if left button pressed...
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -52,13 +50,20 @@ public class GameManager : MonoBehaviour {
 
                 foreach (GameObject door in doors)
                 {
-                    if(clickedObject.name != door.name)
-                    {
-                        door.GetComponent<SlidingDoor>().closeDoor();
+                    if (door != null) {
+                        if (clickedObject.name != door.name)
+                        {
+                            door.GetComponent<SlidingDoor>().closeDoor();
+                        }
                     }
                 }
             } 
         }
+    }
+
+    public void updateDoorsList()
+    {
+        doors = GameObject.FindGameObjectsWithTag("SlidingDoor");
     }
 
     public void removeHP()

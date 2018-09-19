@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnerArea : MonoBehaviour {
 
     public GameObject slidingDoor;
-    GameObject spawnerArea;
+    GameObject gameManager;
 
     public float intervalTimer;
     float staticSpawningInterval = 1; // Spawning interval should be given in seconds
@@ -18,7 +18,7 @@ public class SpawnerArea : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        spawnerArea = GameObject.Find("SpawnerArea");
+        gameManager = GameObject.Find("GameManager");
 
         maxInterval = staticSpawningInterval + 2;
         minInterval = staticSpawningInterval;
@@ -42,7 +42,7 @@ public class SpawnerArea : MonoBehaviour {
         if (intervalTimer <= 0)
         {
             // Timer ran out, create new door
-            Instantiate(slidingDoor, spawnerArea.transform, false);
+            Instantiate(slidingDoor, transform, false);
             resetIntervalTimer();
         }
     }
@@ -53,7 +53,8 @@ public class SpawnerArea : MonoBehaviour {
 
         if (intervalTimer <= 0)
         {
-            Instantiate(slidingDoor, spawnerArea.transform, false);
+            Instantiate(slidingDoor, transform, false);
+            gameManager.GetComponent<GameManager>().updateDoorsList();
             resetIntervalTimerRandom();
         }
     }
