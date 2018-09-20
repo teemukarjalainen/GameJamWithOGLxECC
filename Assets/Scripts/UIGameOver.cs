@@ -23,7 +23,6 @@ public class UIGameOver : MonoBehaviour
     bool alphaDown = false;
     bool fontSizeDown = false;
     int score = 0;
-    int fontSizeDelay = 0;
 
     // Use this for initialization
     void Start()
@@ -176,31 +175,26 @@ public class UIGameOver : MonoBehaviour
                     gameOverNewRecord.GetComponent<Text>().color = color;
 
                     // update newrecord size
-                    ++fontSizeDelay;
-                    if (fontSizeDelay >= 1)
+                    int fontSize = gameOverNewRecord.GetComponent<Text>().fontSize;
+                    if (fontSizeDown)
                     {
-                        fontSizeDelay = 0;
-                        int fontSize = gameOverNewRecord.GetComponent<Text>().fontSize;
-                        if (fontSizeDown)
+                        --fontSize;
+                        if (fontSize <= 50)
                         {
-                            --fontSize;
-                            if (fontSize <= 50)
-                            {
-                                fontSize = 50;
-                                fontSizeDown = false;
-                            }
+                            fontSize = 50;
+                            fontSizeDown = false;
                         }
-                        else
-                        {
-                            ++fontSize;
-                            if (fontSize >= 60)
-                            {
-                                fontSize = 60;
-                                fontSizeDown = true;
-                            }
-                        }
-                        gameOverNewRecord.GetComponent<Text>().fontSize = fontSize;
                     }
+                    else
+                    {
+                        ++fontSize;
+                        if (fontSize >= 60)
+                        {
+                            fontSize = 60;
+                            fontSizeDown = true;
+                        }
+                    }
+                    gameOverNewRecord.GetComponent<Text>().fontSize = fontSize;
                 }
 
                 // update button size

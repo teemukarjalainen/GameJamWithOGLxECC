@@ -32,6 +32,8 @@ public class UIHpManager : MonoBehaviour
             if (i > hp)
             {
                 Color color = obj.GetComponent<Image>().color;
+                color.g = 0;
+                color.b = 0;
                 color.a -= 0.1f;
                 if (color.a < 0)
                 {
