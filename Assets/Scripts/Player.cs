@@ -6,10 +6,15 @@ public class Player : MonoBehaviour {
 
     GameObject gameManager;
 
-	// Use this for initialization
-	void Start () {
-        gameManager = GameObject.Find("GameManager");
+    public Material playerHeadMaterial;
+    public Texture playerDamagedTexture;
+    public Texture playerNormalTexture;
+    
+    public GameObject brokenDoor;
 
+    // Use this for initialization
+    void Start () {
+        gameManager = GameObject.Find("GameManager");
     }
 
     void OnTriggerEnter(Collider col)
@@ -22,13 +27,23 @@ public class Player : MonoBehaviour {
             // We passed a door so let it move on. Increment the passed doors and combo counter.
             gameManager.GetComponent<GameManager>().addPass();
             gameManager.GetComponent<GameManager>().addCombo();
+            playerHeadMaterial.mainTexture = playerNormalTexture;
+
         } else if (!door.GetComponent<SlidingDoor>().isOpen)
         {
             // DOOR HIT
-            // Destroy the door that we collided, clear player combo and remove 1 health
-            Destroy(col.gameObject);
+            // "Destroy" the door that we collided, clear player combo and remove 1 health
+            // Destroy(col.gameObject);
             gameManager.GetComponent<GameManager>().clearCombo();
             gameManager.GetComponent<GameManager>().removeHP();
+            playerHeadMaterial.mainTexture = playerDamagedTexture;
+
+            Vector3 newPos = door.transform.position;
+            Quaternion newRot = door.transform.rotation;
+
+            Instantiate(brokenDoor, newPos, newRot);
+
+            door.GetComponent<SlidingDoor>().breakDoor();
         }
 
         // Show player score in debug, will be removed and replaced with actual score board

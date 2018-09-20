@@ -11,9 +11,17 @@ public class GameManager : MonoBehaviour {
     GameObject player;
     GameObject playerTarget;
 
+    public Material playerBodyMaterial;
+    public Material playerHeadMaterial;
+    public Texture gameOverPlayerHead;
+    public Texture gameOverPlayerBody;
+
+    public Texture playerHeadNormal;
+    public Texture playerBodyNormal;
+
     private float startCountDown = 3;
     private bool gameStarted = false;
-    private int passesBetweenLevels = 5;
+    private int passesBetweenLevels = 3;
 
     public int hp;
     int currentLevel = 0;
@@ -29,6 +37,9 @@ public class GameManager : MonoBehaviour {
 
         playerTarget = GameObject.Find("PlayerTargetPosition");
         player = GameObject.Find("PlayerCharacter");
+
+        playerHeadMaterial.mainTexture = playerHeadNormal;
+        playerBodyMaterial.mainTexture = playerBodyNormal;
 
         SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
     }
@@ -94,8 +105,10 @@ public class GameManager : MonoBehaviour {
 
     public void gameOver()
     {
-        // TODO: Implement game over feature
         spawnerArea.SetActive(false);
+
+        playerHeadMaterial.mainTexture = gameOverPlayerHead;
+        playerBodyMaterial.mainTexture = gameOverPlayerBody;
 
         isGameOver = true;
     }
