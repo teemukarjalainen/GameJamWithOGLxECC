@@ -8,6 +8,7 @@ public class UIHpManager : MonoBehaviour
     const int initHp = 3;
 
     GameObject gameManager;
+    GameObject audioObject;
     GameObject redMaskObject;
     bool sizeUp = false;
     bool isDamage = false;
@@ -18,6 +19,7 @@ public class UIHpManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        audioObject = GameObject.Find("Audio");
         redMaskObject = GameObject.Find("ImageDamageMask");
     }
 
@@ -29,6 +31,7 @@ public class UIHpManager : MonoBehaviour
             if (hp > gameManager.GetComponent<GameManager>().hp)
             {
                 isDamage = true;
+                audioObject.GetComponent<UIAudioManager>().PlayDamage();
             }
             hp = gameManager.GetComponent<GameManager>().hp;
         }

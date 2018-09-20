@@ -8,6 +8,8 @@ public class UIAudioManager : MonoBehaviour
     public AudioClip score;
     public AudioClip gameOver;
     public AudioClip damage;
+    public AudioClip result;
+    public AudioClip open;
 
     AudioSource audioSource;
 
@@ -25,21 +27,37 @@ public class UIAudioManager : MonoBehaviour
 
     public void PlayClick()
     {
-
+        audioSource.clip = click;
+        audioSource.Play();
     }
 
     public void PlayScore()
     {
-
+        audioSource.clip = score;
+        audioSource.Play();
     }
 
     public void PlayGameOver()
     {
-
+        audioSource.clip = gameOver;
+        audioSource.Play();
     }
 
     public void PlayDamage()
     {
+        audioSource.clip = damage;
+        audioSource.Play();
+    }
 
+    public void PlayResult()
+    {
+        audioSource.clip = result;
+        audioSource.Play();
+    }
+
+    public void PlayOpen()
+    {
+        audioSource.clip = open;
+        audioSource.Play();
     }
 }

@@ -6,6 +6,7 @@ public class UIFadeManager : MonoBehaviour
 {
     const int fadeSpeed = 10;
 
+    GameObject audioObject;
     GameObject leftFadeObject1;
     GameObject leftFadeObject2;
     GameObject rightFadeObject1;
@@ -16,6 +17,7 @@ public class UIFadeManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        audioObject = GameObject.Find("Audio");
         leftFadeObject1 = GameObject.Find("ImageFadeLeft1");
         leftFadeObject2 = GameObject.Find("ImageFadeLeft2");
         rightFadeObject1 = GameObject.Find("ImageFadeRight1");
@@ -30,6 +32,10 @@ public class UIFadeManager : MonoBehaviour
             fadeOut = false;
             {// left fade
                 Vector3 pos = leftFadeObject2.transform.localPosition;
+                if (pos.x == -160)
+                {
+                    audioObject.GetComponent<UIAudioManager>().PlayOpen();
+                }
                 pos.x -= fadeSpeed;
                 leftFadeObject2.transform.localPosition = pos;
                 if (pos.x <= -480)
@@ -68,6 +74,10 @@ public class UIFadeManager : MonoBehaviour
         {
             {// left fade
                 Vector3 pos = leftFadeObject2.transform.localPosition;
+                if (pos.x == -800)
+                {
+                    audioObject.GetComponent<UIAudioManager>().PlayOpen();
+                }
                 pos.x += fadeSpeed;
                 leftFadeObject2.transform.localPosition = pos;
                 if (pos.x >= -480)

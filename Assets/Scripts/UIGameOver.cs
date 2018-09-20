@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIGameOver : MonoBehaviour
 {
     GameObject gameManager;
+    GameObject audioObject;
     GameObject scoreObject;
     GameObject gameOverMaskObject;
     GameObject gameOverTextObject;
@@ -28,6 +29,7 @@ public class UIGameOver : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        audioObject = GameObject.Find("Audio");
         scoreObject = GameObject.Find("Score");
         gameOverMaskObject = GameObject.Find("ImageGameOverMask");
         gameOverTextObject = GameObject.Find("TextGameOver");
@@ -42,14 +44,21 @@ public class UIGameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F11))
+        if (Input.GetKeyDown(KeyCode.F11) && !isGameOver)
         {
             isGameOver = true;
+            GameObject.Find("BGM").SetActive(false);
+            GameObject.Find("BGMGameOver").GetComponent<UIAudioManager>().PlayGameOver();
         }
 
-        if (gameManager)
+        if (gameManager && !isGameOver)
         {
             isGameOver = gameManager.GetComponent<GameManager>().isGameOver;
+            if (isGameOver)
+            {
+                GameObject.Find("BGM").SetActive(false);
+                GameObject.Find("BGMGameOver").GetComponent<UIAudioManager>().PlayGameOver();
+            }
         }
 
         if (isGameOver)
@@ -82,9 +91,10 @@ public class UIGameOver : MonoBehaviour
                     if (score >= scoreObject.GetComponent<UIScoreManager>().score)
                     {
                         score = scoreObject.GetComponent<UIScoreManager>().score;
-                        if (scoreObject.GetComponent<UIScoreManager>().plusScore == 0)
+                        if (scoreObject.GetComponent<UIScoreManager>().plusScore == 0 && !scoreCountStop)
                         {
                             scoreCountStop = true;
+                            audioObject.GetComponent<UIAudioManager>().PlayResult();
                         }
                     }
                     string str0 = "";

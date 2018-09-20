@@ -10,6 +10,7 @@ public class UIScoreManager : MonoBehaviour
     public int plusScore = 0;
 
     GameObject gameManager;
+    GameObject audioObject;
     GameObject scoreObject;
     GameObject moveUpParent;
     int doorPassed = 0;
@@ -18,6 +19,7 @@ public class UIScoreManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        audioObject = GameObject.Find("Audio");
         scoreObject = GameObject.Find("TextScoreNumber");
         moveUpParent = GameObject.Find("TextMoveUpParent");
     }
@@ -64,6 +66,7 @@ public class UIScoreManager : MonoBehaviour
 
     void InstantiateMoveUpText(int addScore)
     {
+        audioObject.GetComponent<UIAudioManager>().PlayScore();
         int down = 0;
         if (moveUpParent.transform.childCount > 0)
         {
