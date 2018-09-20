@@ -22,6 +22,9 @@ public class UIScoreManager : MonoBehaviour
         audioObject = GameObject.Find("Audio");
         scoreObject = GameObject.Find("TextScoreNumber");
         moveUpParent = GameObject.Find("TextMoveUpParent");
+
+        string text = PlayerPrefs.GetString("Str1st", "0000000000");
+        GameObject.Find("TextHighScoreNumber").GetComponent<Text>().text = text;
     }
 
     // Update is called once per frame
