@@ -10,6 +10,7 @@ public class UIScoreManager : MonoBehaviour
     public int plusScore = 0;
 
     GameObject gameManager;
+    GameObject audioObject;
     GameObject scoreObject;
     GameObject moveUpParent;
     int doorPassed = 0;
@@ -18,6 +19,7 @@ public class UIScoreManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        audioObject = GameObject.Find("Audio");
         scoreObject = GameObject.Find("TextScoreNumber");
         moveUpParent = GameObject.Find("TextMoveUpParent");
     }
@@ -30,19 +32,28 @@ public class UIScoreManager : MonoBehaviour
             if (doorPassed < gameManager.GetComponent<GameManager>().doorsPassed)
             {
                 doorPassed = gameManager.GetComponent<GameManager>().doorsPassed;
-                InstantiateMoveUpText(100);
+                InstantiateMoveUpText(100 * gameManager.GetComponent<GameManager>().combo);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        // cheat button
+        if (Input.GetKeyDown(KeyCode.F12))
         {
             InstantiateMoveUpText(500);
         }
 
         if (plusScore > 0)
         {
-            --plusScore;
-            ++score;
+            if(plusScore - 16 >= 0)
+            {
+                plusScore -= 16;
+                score += 16;
+            }
+            else
+            {
+                score += plusScore;
+                plusScore = 0;
+            }
         }
 
         string str0 = "";
@@ -55,6 +66,7 @@ public class UIScoreManager : MonoBehaviour
 
     void InstantiateMoveUpText(int addScore)
     {
+        audioObject.GetComponent<UIAudioManager>().PlayScore();
         int down = 0;
         if (moveUpParent.transform.childCount > 0)
         {

@@ -23,14 +23,15 @@ public class UITitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            StartCoroutine("SceneChange");
-        }
-
-        // update text alpha
         if (!isSceneEnd)
         {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                GetComponent<AudioSource>().Play();
+                StartCoroutine("SceneChange");
+            }
+
+            // update text alpha
             Color color = textObject.GetComponent<Text>().color;
             if (alphaUp)
             {

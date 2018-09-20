@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIGameOver : MonoBehaviour
 {
     GameObject gameManager;
+    GameObject audioObject;
     GameObject scoreObject;
     GameObject gameOverMaskObject;
     GameObject gameOverTextObject;
@@ -28,6 +29,7 @@ public class UIGameOver : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        audioObject = GameObject.Find("Audio");
         scoreObject = GameObject.Find("Score");
         gameOverMaskObject = GameObject.Find("ImageGameOverMask");
         gameOverTextObject = GameObject.Find("TextGameOver");
@@ -42,14 +44,21 @@ public class UIGameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.F11) && !isGameOver)
         {
             isGameOver = true;
+            GameObject.Find("BGM").SetActive(false);
+            GameObject.Find("BGMGameOver").GetComponent<UIAudioManager>().PlayGameOver();
         }
 
-        if (gameManager)
+        if (gameManager && !isGameOver)
         {
             isGameOver = gameManager.GetComponent<GameManager>().isGameOver;
+            if (isGameOver)
+            {
+                GameObject.Find("BGM").SetActive(false);
+                GameObject.Find("BGMGameOver").GetComponent<UIAudioManager>().PlayGameOver();
+            }
         }
 
         if (isGameOver)
@@ -78,13 +87,14 @@ public class UIGameOver : MonoBehaviour
                 if (color.a >= 1.0f)
                 {
                     // set score number
-                    score += 8;
+                    score += 16;
                     if (score >= scoreObject.GetComponent<UIScoreManager>().score)
                     {
                         score = scoreObject.GetComponent<UIScoreManager>().score;
-                        if (scoreObject.GetComponent<UIScoreManager>().plusScore == 0)
+                        if (scoreObject.GetComponent<UIScoreManager>().plusScore == 0 && !scoreCountStop)
                         {
                             scoreCountStop = true;
+                            audioObject.GetComponent<UIAudioManager>().PlayResult();
                         }
                     }
                     string str0 = "";
@@ -99,39 +109,39 @@ public class UIGameOver : MonoBehaviour
                     if (scoreCountStop && !updatedRanking)
                     {
                         updatedRanking = true;
-                        int rank1 = PlayerPrefs.GetInt("1st", 0);
-                        int rank2 = PlayerPrefs.GetInt("2nd", 0);
-                        int rank3 = PlayerPrefs.GetInt("3rd", 0);
-                        string str1st = PlayerPrefs.GetString("1st", "0000000000");
-                        string str2nd = PlayerPrefs.GetString("2nd", "0000000000");
-                        string str3rd = PlayerPrefs.GetString("3rd", "0000000000");
+                        int rank1 = PlayerPrefs.GetInt("Num1st", 0);
+                        int rank2 = PlayerPrefs.GetInt("Num2nd", 0);
+                        int rank3 = PlayerPrefs.GetInt("Num3rd", 0);
+                        string str1st = PlayerPrefs.GetString("Str1st", "0000000000");
+                        string str2nd = PlayerPrefs.GetString("Str2nd", "0000000000");
+                        string str3rd = PlayerPrefs.GetString("Str3rd", "0000000000");
                         if (score > rank1)
                         {
-                            PlayerPrefs.SetInt("1st", score);
-                            PlayerPrefs.SetInt("2nd", rank1);
-                            PlayerPrefs.SetInt("3rd", rank2);
+                            PlayerPrefs.SetInt("Num1st", score);
+                            PlayerPrefs.SetInt("Num2nd", rank1);
+                            PlayerPrefs.SetInt("Num3rd", rank2);
                             str3rd = str2nd;
                             str2nd = str1st;
                             str1st = str0 + score.ToString();
-                            PlayerPrefs.SetString("1st", str1st);
-                            PlayerPrefs.SetString("2nd", str2nd);
-                            PlayerPrefs.SetString("3rd", str3rd);
+                            PlayerPrefs.SetString("Str1st", str1st);
+                            PlayerPrefs.SetString("Str2nd", str2nd);
+                            PlayerPrefs.SetString("Str3rd", str3rd);
                             activeNewRecord = true;
                         }
                         else if (score > rank2)
                         {
-                            PlayerPrefs.SetInt("2nd", score);
-                            PlayerPrefs.SetInt("3rd", rank2);
+                            PlayerPrefs.SetInt("Num2nd", score);
+                            PlayerPrefs.SetInt("Num3rd", rank2);
                             str3rd = str2nd;
                             str2nd = str0 + score.ToString();
-                            PlayerPrefs.SetString("2nd", str2nd);
-                            PlayerPrefs.SetString("3rd", str3rd);
+                            PlayerPrefs.SetString("Str2nd", str2nd);
+                            PlayerPrefs.SetString("Str3rd", str3rd);
                         }
                         else if (score > rank3)
                         {
-                            PlayerPrefs.SetInt("3rd", score);
+                            PlayerPrefs.SetInt("Num3rd", score);
                             str3rd = str0 + score.ToString();
-                            PlayerPrefs.SetString("3rd", str3rd);
+                            PlayerPrefs.SetString("Str3rd", str3rd);
                         }
                         string strRanking = "1st\t" + str1st + "\n2nd\t" + str2nd + "\n3rd\t" + str3rd;
                         gameOverRankingObject.GetComponent<Text>().text = strRanking;
