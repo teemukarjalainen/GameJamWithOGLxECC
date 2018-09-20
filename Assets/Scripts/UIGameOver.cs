@@ -99,39 +99,39 @@ public class UIGameOver : MonoBehaviour
                     if (scoreCountStop && !updatedRanking)
                     {
                         updatedRanking = true;
-                        int rank1 = PlayerPrefs.GetInt("1st", 0);
-                        int rank2 = PlayerPrefs.GetInt("2nd", 0);
-                        int rank3 = PlayerPrefs.GetInt("3rd", 0);
-                        string str1st = PlayerPrefs.GetString("1st", "0000000000");
-                        string str2nd = PlayerPrefs.GetString("2nd", "0000000000");
-                        string str3rd = PlayerPrefs.GetString("3rd", "0000000000");
+                        int rank1 = PlayerPrefs.GetInt("Num1st", 0);
+                        int rank2 = PlayerPrefs.GetInt("Num2nd", 0);
+                        int rank3 = PlayerPrefs.GetInt("Num3rd", 0);
+                        string str1st = PlayerPrefs.GetString("Str1st", "0000000000");
+                        string str2nd = PlayerPrefs.GetString("Str2nd", "0000000000");
+                        string str3rd = PlayerPrefs.GetString("Str3rd", "0000000000");
                         if (score > rank1)
                         {
-                            PlayerPrefs.SetInt("1st", score);
-                            PlayerPrefs.SetInt("2nd", rank1);
-                            PlayerPrefs.SetInt("3rd", rank2);
+                            PlayerPrefs.SetInt("Num1st", score);
+                            PlayerPrefs.SetInt("Num2nd", rank1);
+                            PlayerPrefs.SetInt("Num3rd", rank2);
                             str3rd = str2nd;
                             str2nd = str1st;
                             str1st = str0 + score.ToString();
-                            PlayerPrefs.SetString("1st", str1st);
-                            PlayerPrefs.SetString("2nd", str2nd);
-                            PlayerPrefs.SetString("3rd", str3rd);
+                            PlayerPrefs.SetString("Str1st", str1st);
+                            PlayerPrefs.SetString("Str2nd", str2nd);
+                            PlayerPrefs.SetString("Str3rd", str3rd);
                             activeNewRecord = true;
                         }
                         else if (score > rank2)
                         {
-                            PlayerPrefs.SetInt("2nd", score);
-                            PlayerPrefs.SetInt("3rd", rank2);
+                            PlayerPrefs.SetInt("Num2nd", score);
+                            PlayerPrefs.SetInt("Num3rd", rank2);
                             str3rd = str2nd;
                             str2nd = str0 + score.ToString();
-                            PlayerPrefs.SetString("2nd", str2nd);
-                            PlayerPrefs.SetString("3rd", str3rd);
+                            PlayerPrefs.SetString("Str2nd", str2nd);
+                            PlayerPrefs.SetString("Str3rd", str3rd);
                         }
                         else if (score > rank3)
                         {
-                            PlayerPrefs.SetInt("3rd", score);
+                            PlayerPrefs.SetInt("Num3rd", score);
                             str3rd = str0 + score.ToString();
-                            PlayerPrefs.SetString("3rd", str3rd);
+                            PlayerPrefs.SetString("Str3rd", str3rd);
                         }
                         string strRanking = "1st\t" + str1st + "\n2nd\t" + str2nd + "\n3rd\t" + str3rd;
                         gameOverRankingObject.GetComponent<Text>().text = strRanking;
