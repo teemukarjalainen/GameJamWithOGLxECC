@@ -8,8 +8,8 @@ public class SpawnerArea : MonoBehaviour {
     GameObject gameManager;
 
     public float intervalTimer;
-    float staticSpawningInterval = 1.5f; // Spawning interval should be given in seconds
-    float intervalChangeBetweenLevels = 0.2f;
+    float staticSpawningInterval = 1.2f; // Spawning interval should be given in seconds
+    float intervalChangeBetweenLevels = 0.3f;
 
     float maxInterval { get; set; }
     float minInterval { get; set; }
@@ -84,13 +84,13 @@ public class SpawnerArea : MonoBehaviour {
 
     public void changeMaxInterval()
     {
-        if (maxInterval > 0.5f)
+        if (maxInterval > 0.4f)
         {
             maxInterval = maxInterval - intervalChangeBetweenLevels;
 
-            if (maxInterval < 0.5f)
+            if (maxInterval < 0.4f)
             {
-                    maxInterval = 0.5f;
+                    maxInterval = 0.4f;
             }
         }
     }

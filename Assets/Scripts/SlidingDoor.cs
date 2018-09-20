@@ -5,6 +5,8 @@ using UnityEngine;
 public class SlidingDoor : MonoBehaviour {
 
     public bool isOpen = false;
+    bool isBroken = false;
+
     Renderer rend;
     Animator animator;
 
@@ -30,6 +32,11 @@ public class SlidingDoor : MonoBehaviour {
         }
         */
 	}
+
+    public void breakDoor()
+    {
+        Destroy(gameObject);
+    }
 
     public void operateDoor()
     {
