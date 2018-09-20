@@ -61,6 +61,13 @@ public class UIGameOver : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !scoreCountStop)
+        {
+            scoreObject.GetComponent<UIScoreManager>().score += scoreObject.GetComponent<UIScoreManager>().plusScore;
+            scoreObject.GetComponent<UIScoreManager>().plusScore = 0;
+            score = scoreObject.GetComponent<UIScoreManager>().score;
+        }
+
         if (isGameOver)
         {
             // update mask size
