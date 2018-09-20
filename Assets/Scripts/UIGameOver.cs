@@ -42,7 +42,7 @@ public class UIGameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.F11))
         {
             isGameOver = true;
         }
@@ -78,7 +78,7 @@ public class UIGameOver : MonoBehaviour
                 if (color.a >= 1.0f)
                 {
                     // set score number
-                    score += 8;
+                    score += 16;
                     if (score >= scoreObject.GetComponent<UIScoreManager>().score)
                     {
                         score = scoreObject.GetComponent<UIScoreManager>().score;

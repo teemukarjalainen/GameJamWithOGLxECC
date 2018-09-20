@@ -30,19 +30,28 @@ public class UIScoreManager : MonoBehaviour
             if (doorPassed < gameManager.GetComponent<GameManager>().doorsPassed)
             {
                 doorPassed = gameManager.GetComponent<GameManager>().doorsPassed;
-                InstantiateMoveUpText(100);
+                InstantiateMoveUpText(100 * gameManager.GetComponent<GameManager>().combo);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        // cheat button
+        if (Input.GetKeyDown(KeyCode.F12))
         {
             InstantiateMoveUpText(500);
         }
 
         if (plusScore > 0)
         {
-            --plusScore;
-            ++score;
+            if(plusScore - 16 >= 0)
+            {
+                plusScore -= 16;
+                score += 16;
+            }
+            else
+            {
+                score += plusScore;
+                plusScore = 0;
+            }
         }
 
         string str0 = "";
